@@ -8,12 +8,15 @@ module.exports = (app) => {
 };
 
 router.get('/', (req, res, next) => {
-  Post.find().populate('author').populate('category').exec( (err, posts) => {
-    if (err) return next(err);
-    res.render('blog/index.jade', {
-      posts: posts
+  Post.find({ published: true })
+    .populate('author')
+    .populate('category')
+    .exec( (err, posts) => {
+      if (err) return next(err);
+      res.render('blog/index.jade', {
+        posts: posts
+      });
     });
-  });
 });
 
 router.get('/view', (req, res, next) => {
