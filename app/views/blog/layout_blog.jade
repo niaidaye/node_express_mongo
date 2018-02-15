@@ -1,0 +1,66 @@
+extends ../layout
+//引入blog的css样式
+append css
+  link(rel='stylesheet', href='/css/blog.css')
+//继承上一级目录下的layout中的main
+block main
+  //头部
+  block header
+    .blog-masthead
+      .container
+        nav.nav
+          if pageName === '/'
+            a.nav-link.active(href='/') 首页
+          else
+            a.nav-link(href='/') 首页
+          if pageName === '/about'
+            a.nav-link.active(href='/about') 关于
+          else
+            a.nav-link(href='/about') 关于
+          if pageName === '/contact'
+            a.nav-link.active(href='/contact') 联系
+          else
+            a.nav-link(href='/contact') 联系
+  //主体内容
+  main.container(role='main')
+    .row
+      .col-sm-8.blog-main
+        block content
+      aside.col-sm-3.ml-sm-auto.blog-sidebar
+        .sidebar-module.sidebar-module-inset
+          h4 关于我
+          p
+            | Etiam porta
+            em sem malesuada magna
+            |  mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.
+        .sidebar-module
+          h4 文章分类
+          ol.list-unstyled
+            li
+              a(href='#') March 2014
+            li
+              a(href='#') February 2014
+            li
+              a(href='#') January 2014
+            li
+              a(href='#') December 2013
+
+        .sidebar-module
+          h4 友情链接
+          ol.list-unstyled
+            li
+              a(href='#') GitHub
+            li
+              a(href='#') Twitter
+            li
+              a(href='#') Facebook
+  //footer部分
+  block footer
+    footer.blog-footer
+      p
+        | Node_blog
+        |  by
+        a(href='') @AX.com
+        | .
+      p
+        a(href='#') Back to top
