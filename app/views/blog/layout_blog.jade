@@ -36,9 +36,9 @@ block main
         .sidebar-module
           h4 文章分类
           ol.list-unstyled
-            //each category in categories
-            li
-              a(href='/posts/category/' + category.name)= category.name
+            each category in categories
+              li
+                a(href='/posts/category/' + category.name)= category.name
 
 
         .sidebar-module
