@@ -9,6 +9,9 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const compress = require('compression');
 const methodOverride = require('method-override');
+const mongoose = require('mongoose');
+
+const Category = mongoose.model('Category');
 
 module.exports = (app, config) => {
   const env = process.env.NODE_ENV || 'development';
@@ -23,9 +26,14 @@ module.exports = (app, config) => {
     app.locals.pageName = req.path;
     app.locals.moment = moment;
     app.locals.truncate = truncate;
-
+    Category.find((err, categories) => {
+        if (err) {
+          return  next(err);
+        }
+      app.locals.category = categories;
+      next();
+      });
     // console.log(app.locals.pageName);在终端输出路径
-    next();
   });
   app.use(logger('dev'));
   app.use(bodyParser.json());
